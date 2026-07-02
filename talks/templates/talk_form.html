@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+Fixit
+{% endblock %}
+
+
+
+
+{% block content %}
+
+<h1 class="text-center mt-4">Welcome to Fixit</h1>
+<h2>
+    {%if form.instance.pk %}
+    Edit Complain
+    {% else %}
+    Create Complain
+    {% endif %}
+</h2>
+<form method="post" enctype="multipart/form-data" class="form" >
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-warning" type="submit"> Submit </button>
+</form>
+ <a href="{% url 'talk_list' %}" > Back To Fixit Home</a>
+
+{% endblock %}

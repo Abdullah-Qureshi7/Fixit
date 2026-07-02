@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+
+{% block title %}
+Fixit
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="text-center my-5">
+    <h1 class="fw-bold">Welcome to VibeTalks</h1>
+    <p class="text-secondary">Share your thoughts, complaints, and feedback with the community.</p>
+    <a class="btn btn-primary px-4 mt-2" href="{% url 'talk_create' %}">
+        <i class="bi bi-plus-circle"></i> Create a Complaint
+    </a>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4">
+    {% for talk in talks %}
+    <div class="col">
+        <div class="card h-100 shadow-sm border-0 talk-card">
+            <div class="card-img-wrapper">
+                <img src="{{ talk.photo.url }}" class="card-img-top" alt="{{ talk.user.username }}">
+            </div>
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title fw-semibold d-flex align-items-center gap-2">
+                    <i class="bi bi-person-circle text-primary"></i>
+                    {{ talk.user.username }}
+                </h5>
+                <p class="card-text text-secondary flex-grow-1">
+                    {{ talk.text|truncatewords:20 }}
+                </p>
+
+                {% if talk.user == user %}
+                <div class="d-flex gap-2 mt-3 pt-3 border-top">
+                    <a href="{% url 'talk_edit' talk.id %}" class="btn btn-sm btn-outline-primary flex-fill">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <a href="{% url 'talk_delete' talk.id %}" class="btn btn-sm btn-outline-danger flex-fill">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+

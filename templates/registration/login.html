@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+<h2> Fixit Login Form </h2>
+<form method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button class="btn btn-primary"> Login </button>
+
+</form>
+<p>
+    Don't have a Account ? <a href="{% url 'register' %}">Login Here </a>
+</p>
+{% endblock %}
